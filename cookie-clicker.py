@@ -10,7 +10,8 @@ root.geometry("900x200")
 count = 0
 cookie = 0
 jar = 0
-roundedCount = 1
+fakecount = 0
+roundedCount = 0
 upgradeAmount = 1
 numberOfDeath = 0
 showCookies = False
@@ -33,6 +34,7 @@ def clickUpgrade():
 
 def clickCounter():
 
+    global fakecount
     global numberOfDeath
     global roundedCount
     global showShop
@@ -42,6 +44,7 @@ def clickCounter():
     global cookie
     global count
     count = count + upgradeAmount
+    fakecount = fakecount + upgradeAmount
 
     Clicks = Label(root, text=f"you have clicked {count} times")
     achievement1 = Label(root, text=f"congrats! you have reached {count} clicks! have this cookie 🍪")
@@ -50,19 +53,9 @@ def clickCounter():
     jars = Label(root, text=f"You have {jar} jar(s)!")
     shop = Label(root, text="Welcome to the shop!", font=("Arial",20,""))
     shop_clickUpgrade = Button(root, text="+10 clicks", command=clickUpgrade, padx=30, bg="#23272A", fg="#7289DA", font=("Arial",20,""))
-    if count > 100:
-        print("its greater")
-        if count % 100 != 0:
-            roundedCount = int(round(count, -2))
-            numberOfDeath = count - roundedCount
-            
-    print(str(numberOfDeath) +"="+str(count) + "-" + str(roundedCount))
-    print(count - numberOfDeath)
 
-    
-
-    if count - numberOfDeath % 100  == 0:
-        
+    if fakecount >= 100:
+        fakecount = 0
         cookie += 1
         showCookies = True
         showShop = True
